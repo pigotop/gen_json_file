@@ -1,12 +1,12 @@
 import fs from 'fs-extra';
-
+import dotenv from 'dotenv';
+dotenv.config()
 var prod_cd = [
     "0502869",
     "0502887"
 ];
 var jsondata = [];
-
-var jsdata = {PROD_CD: "",INV_MVMNT_QTY: "999"};
+var jsdata = { PROD_CD: "" , INV_MVMNT_QTY: process.env.NUM_INV_MVMNT_QTY };
 
 prod_cd.forEach(element => {
     jsdata.PROD_CD = element
