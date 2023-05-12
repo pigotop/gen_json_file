@@ -1,17 +1,32 @@
-import fs from 'fs';
+import fs from 'fs-extra';
 
-var prod_cd = ["111"];
+var prod_cd = [
+    "0502869",
+    "0502887"
+];
 var jsondata = [];
 
-var jsdata = {"PROD_CD": "","INV_MVMNT_QTY": "999"};
+var jsdata = {PROD_CD: "",INV_MVMNT_QTY: "999"};
 
 prod_cd.forEach(element => {
     jsdata.PROD_CD = element
     jsondata.push(jsdata)
 });
 
-var jsonContent = JSON.stringify(jsondata);
+fs.removeSync('./output');
+fs.outputJsonSync('./output/'+genJsonFileName(),jsondata);
 
-fs.writeFileSync("../gen_json_file/output/output.json", jsonContent);
 console.log("========== finish ==========");
 
+function genJsonFileName(){
+    const today = new Date();
+    console.log("========== today ==========",today);
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    let day = today.getDate();
+
+    if(day < 10) day = '0'+ day;
+    if(month < 10) month = '0'+ month;
+
+    return 'put-config-'+year+month+day+'.json'
+}
