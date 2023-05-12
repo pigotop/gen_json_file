@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
 import dotenv from 'dotenv';
+import util from 'util';
 dotenv.config()
 var prod_cd = [
     "0502869",
@@ -24,9 +25,11 @@ function genJsonFileName(){
     const year = today.getFullYear();
     let month = today.getMonth() + 1;
     let day = today.getDate();
+    let nameJson = util.format('%s%s%s.json',year,padTo2Digits(month),padTo2Digits(day));
 
-    if(day < 10) day = '0'+ day;
-    if(month < 10) month = '0'+ month;
+    return nameJson
+}
 
-    return 'put-config-'+year+month+day+'.json'
+function padTo2Digits(num) {
+    return num.toString().padStart(2,'0');
 }
