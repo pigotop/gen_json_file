@@ -3,15 +3,15 @@ import dotenv from 'dotenv';
 import util from 'util';
 dotenv.config()
 var prod_cd = [
-    "0502869",
-    "0502887"
+    '0502548',
+'0502549',
+'6200815',
 ];
 var jsondata = [];
-var jsdata = { PROD_CD: "" , INV_MVMNT_QTY: process.env.NUM_INV_MVMNT_QTY };
-
 prod_cd.forEach(element => {
-    jsdata.PROD_CD = element
+    let jsdata = { PROD_CD: element , INV_MVMNT_QTY: process.env.NUM_INV_MVMNT_QTY };
     jsondata.push(jsdata)
+    console.log(jsondata)
 });
 
 fs.removeSync('./output');
@@ -25,7 +25,7 @@ function genJsonFileName(){
     const year = today.getFullYear();
     let month = today.getMonth() + 1;
     let day = today.getDate();
-    let nameJson = util.format('%s%s%s.json',year,padTo2Digits(month),padTo2Digits(day));
+    let nameJson = util.format('put-config-%s%s%s.json',year,padTo2Digits(month),padTo2Digits(day));
 
     return nameJson
 }
